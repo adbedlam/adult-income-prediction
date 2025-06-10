@@ -1,4 +1,4 @@
-from inference import inference_res
+from inference import inference_res, inference_res_with_shap
 from train import train_save_XG, train_save_ANN, train_save_RFC
 import os
 
@@ -22,6 +22,6 @@ train_save_ANN(flag)
 train_save_XG(flag)
 
 data = input("Введите строку данных через ',': \n")
-RFC, XG, ANN = inference_res(data)
+RFC, XG, ANN = inference_res_with_shap(data)
 
 print(f"Random Forest classifier: {RFC[0]} \nXGBoost: {XG[0]},\nSimple ANN: {ANN[0]}")

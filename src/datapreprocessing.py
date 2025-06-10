@@ -8,17 +8,6 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from torch.utils.data import DataLoader, Dataset
 
 
-class DataSetInf(Dataset):
-    def __init__(self, x):
-        self.x = torch.tensor(x, dtype=torch.float)
-
-    def __len__(self):
-        return len(self.x)
-
-    def __getitem__(self, idx):
-        return self.x[idx]
-
-
 def read_n_preproc():
     df = pd.read_csv('../data/adult.csv')
 
@@ -88,7 +77,7 @@ def inference_preproc(inp_data):
 
     X_train_final = np.hstack((X_infer_num, X_infer_cat))
 
-    x_train = DataSetInf(X_train_final)
-    x_train_ann = DataLoader(x_train, batch_size=64)
+    names = list(num_cols) + list(ohe.get_feature_names_out(cat_cols))
 
-    return X_train_final, x_train_ann
+
+    return X_train_final, names
